@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Garden paths illustration">
+  <rect width="800" height="600" fill="#d8f3dc"/>
+  <path fill="#40916c" d="M0 420 Q200 360 400 400 T800 380 L800 600 L0 600 Z"/>
+  <path fill="#2d6a4f" stroke="#1b4332" stroke-width="4" fill="none" d="M120 600 C120 400 280 380 400 320 S620 260 720 120"/>
+  <circle cx="620" cy="200" r="40" fill="#95d5b2"/>
+</svg>

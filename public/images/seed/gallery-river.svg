@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="River bend illustration">
+  <rect width="800" height="600" fill="#a8dadc"/>
+  <path fill="#457b9d" d="M0 320 Q200 280 400 340 T800 300 L800 600 L0 600 Z"/>
+  <path fill="#1d3557" opacity="0.25" d="M0 360 Q300 300 600 380 L800 340 L800 600 L0 600 Z"/>
+</svg>

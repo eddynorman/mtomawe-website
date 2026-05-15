@@ -1,0 +1,45 @@
+/**
+ * Global styles for the public website and shared auth screens.
+ * Pulls in Bootstrap 5, Font Awesome 6, and light motion utilities for section reveals.
+ */
+@import 'bootstrap/dist/css/bootstrap.min.css';
+@import '@fortawesome/fontawesome-free/css/all.min.css';
+
+/* Theme colours and typography are set on public pages via layouts/public.blade.php (CSS variables).
+   Avoid defining :root --mt-* here: this file loads after that block via Vite and would override admin settings. */
+
+/* Subtle scroll-reveal (progressive enhancement; respects reduced motion via media query below) */
+.reveal-up {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.65s ease, transform 0.65s ease;
+}
+
+.reveal-up.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .reveal-up {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}
+
+.hero-carousel .carousel-item {
+    min-height: 420px;
+}
+
+@media (min-width: 992px) {
+    .hero-carousel .carousel-item {
+        min-height: 520px;
+    }
+}
+
+.hero-carousel .carousel-caption {
+    background: rgba(0, 0, 0, 0.45);
+    border-radius: 0.5rem;
+    padding: 1rem 1.25rem;
+}

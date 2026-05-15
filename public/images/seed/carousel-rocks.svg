@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-label="Rocky escarpment illustration">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#b7e4c7"/>
+      <stop offset="100%" stop-color="#52b788"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="675" fill="url(#sky)"/>
+  <path fill="#344e41" d="M0 520 L220 280 L420 420 L640 200 L900 460 L1200 300 L1200 675 L0 675 Z"/>
+  <path fill="#2d6a4f" d="M0 560 L300 380 L520 500 L760 340 L1200 420 L1200 675 L0 675 Z"/>
+  <path fill="#1b4332" opacity="0.5" d="M0 600 L400 480 L700 560 L1200 500 L1200 675 L0 675 Z"/>
+</svg>

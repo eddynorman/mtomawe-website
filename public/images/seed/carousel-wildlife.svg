@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-label="Savanna wildlife silhouette illustration">
+  <rect width="1200" height="675" fill="#1b4332"/>
+  <circle cx="200" cy="140" r="70" fill="#ffd166" opacity="0.9"/>
+  <path fill="#2d6a4f" d="M0 520 Q200 460 400 500 T800 480 T1200 510 L1200 675 L0 675 Z"/>
+  <path fill="#0d2818" d="M520 520 L560 380 L600 520 L640 400 L680 520 Z" opacity="0.85"/>
+  <ellipse cx="620" cy="520" rx="120" ry="24" fill="#081c15" opacity="0.35"/>
+</svg>

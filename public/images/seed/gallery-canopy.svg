@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Canopy trees illustration">
+  <rect width="800" height="600" fill="#ecf39e"/>
+  <path fill="#386641" d="M-20 600 L80 200 L180 600 Z M140 600 L260 120 L360 600 Z M320 600 L420 160 L520 600 Z M500 600 L600 140 L700 600 Z M640 600 L740 220 L840 600 Z"/>
+  <path fill="#6a994e" d="M0 520 Q200 480 400 500 T800 480 L800 600 L0 600 Z"/>
+</svg>

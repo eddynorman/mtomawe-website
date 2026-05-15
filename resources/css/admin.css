@@ -1,0 +1,32 @@
+/**
+ * Admin-only styles layered on top of Bootstrap (imported from admin.js).
+ * Quill “snow” theme for rich-text fields managed in the CMS.
+ */
+@import 'quill/dist/quill.snow.css';
+
+.ql-toolbar.ql-snow {
+    border-radius: 0.375rem 0.375rem 0 0;
+}
+
+.ql-container.ql-snow {
+    border-radius: 0 0 0.375rem 0.375rem;
+}
+
+.ql-editor {
+    min-height: 220px;
+    background: #fff;
+}
+
+/* Social link admin: icon-only <select> using Font Awesome 6 Brands glyphs */
+.social-brand-icon-select {
+    font-family: 'Font Awesome 6 Brands', sans-serif;
+    font-size: 1.35rem;
+    line-height: 1.35;
+    padding-top: 0.4rem;
+    padding-bottom: 0.4rem;
+}
+
+.social-brand-icon-select option {
+    font-family: 'Font Awesome 6 Brands', sans-serif;
+    font-size: 1.25rem;
+}
