@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\CarouselSlide;
+use App\Models\Service;
 use App\Support\ContentSlugs;
 use Illuminate\View\View;
 
@@ -21,6 +22,13 @@ class HomeController extends Controller
 
         $sectionSlugs = ContentSlugs::landingSections();
 
-        return view('public.home', compact('slides', 'sectionSlugs'));
+        $featuredServices = Service::query()
+            ->active()
+            ->with('images')
+            ->orderBy('sort_order')
+            ->limit(3)
+            ->get();
+
+        return view('public.home', compact('slides', 'sectionSlugs', 'featuredServices'));
     }
 }

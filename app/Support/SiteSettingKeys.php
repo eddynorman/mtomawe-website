@@ -2,8 +2,10 @@
 
 namespace App\Support;
 
+use App\Models\SiteSetting;
+
 /**
- * Keys stored in the {@see \App\Models\SiteSetting} table so typos are avoided across seeders and forms.
+ * Keys stored in the {@see SiteSetting} table so typos are avoided across seeders and forms.
  */
 final class SiteSettingKeys
 {
@@ -30,4 +32,10 @@ final class SiteSettingKeys
     public const FONT_FAMILY_HEADING = 'font_family_heading';
 
     public const FONT_SIZE_BASE_PX = 'font_size_base_px';
+
+    public const SOCIAL_ICON_COLOR = 'social_icon_color';
+
+    public const SITE_LOGO_PATH = 'site_logo_path';
+
+    public const META_DESCRIPTION = 'meta_description';
 }

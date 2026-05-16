@@ -39,6 +39,9 @@
                 <a class="nav-link rounded @if(request()->routeIs('admin.posts.*')) active bg-success-subtle fw-semibold @endif" href="{{ route('admin.posts.index') }}">
                     <i class="fa-solid fa-bullhorn fa-fw me-2" aria-hidden="true"></i>{{ __('Posts') }}
                 </a>
+                <a class="nav-link rounded @if(request()->routeIs('admin.services.*')) active bg-success-subtle fw-semibold @endif" href="{{ route('admin.services.index') }}">
+                    <i class="fa-solid fa-briefcase fa-fw me-2" aria-hidden="true"></i>{{ __('Services') }}
+                </a>
                 <a class="nav-link rounded @if(request()->routeIs('admin.contact-messages.*')) active bg-success-subtle fw-semibold @endif" href="{{ route('admin.contact-messages.index') }}">
                     <i class="fa-solid fa-inbox fa-fw me-2" aria-hidden="true"></i>{{ __('Messages') }}
                     @if($unreadContactCount > 0)

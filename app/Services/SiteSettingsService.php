@@ -90,6 +90,7 @@ class SiteSettingsService
             'secondary' => SiteColors::normalizeHex($this->get(SiteSettingKeys::SECONDARY_COLOR), '#52796f'),
             'body' => SiteColors::normalizeHex($this->get(SiteSettingKeys::BODY_TEXT_COLOR), '#1b4332'),
             'heading' => SiteColors::normalizeHex($this->get(SiteSettingKeys::HEADING_COLOR), '#0d2818'),
+            'social_icon' => SiteColors::normalizeHex($this->get(SiteSettingKeys::SOCIAL_ICON_COLOR), $this->get(SiteSettingKeys::PRIMARY_COLOR, '#2d6a4f')),
             'font_base' => $baseFont,
             'font_heading' => $headingFont,
             'font_size_px' => $this->get(SiteSettingKeys::FONT_SIZE_BASE_PX, '17'),

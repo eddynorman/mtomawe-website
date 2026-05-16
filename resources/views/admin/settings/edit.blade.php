@@ -23,7 +23,7 @@
 @section('heading', __('Site settings'))
 
 @section('content')
-    <form method="post" action="{{ route('admin.settings.update') }}" class="card border-0 shadow-sm">
+    <form method="post" action="{{ route('admin.settings.update') }}" enctype="multipart/form-data" class="card border-0 shadow-sm">
         @csrf
         @method('PUT')
         <div class="card-body row g-3">
@@ -37,6 +37,14 @@
             <div class="col-md-6">
                 <label class="form-label" for="email">{{ __('Public email') }}</label>
                 <input id="email" name="{{ SiteSettingKeys::EMAIL }}" type="email" class="form-control" value="{{ old(SiteSettingKeys::EMAIL, $values->get(SiteSettingKeys::EMAIL)) }}">
+            </div>
+            <div class="col-md-6">
+                <label class="form-label" for="logo">{{ __('Site logo') }}</label>
+                <input id="logo" name="logo" type="file" class="form-control" accept="image/*">
+                <div class="form-text">{{ __('Upload a site logo to appear in the header and favicon.') }}</div>
+                @if($values->get(SiteSettingKeys::SITE_LOGO_PATH))
+                    <img src="{{ \App\Support\Media::url($values->get(SiteSettingKeys::SITE_LOGO_PATH)) }}" alt="{{ __('Current logo') }}" class="mt-2 rounded" style="max-height: 64px;">
+                @endif
             </div>
             <div class="col-12">
                 <label class="form-label" for="address">{{ __('Address line') }}</label>
@@ -64,6 +72,10 @@
                 <input id="secondary" name="{{ SiteSettingKeys::SECONDARY_COLOR }}" type="color" class="form-control form-control-color" value="{{ old(SiteSettingKeys::SECONDARY_COLOR, SiteColors::normalizeHex($values->get(SiteSettingKeys::SECONDARY_COLOR), '#52796f')) }}">
             </div>
             <div class="col-md-3">
+                <label class="form-label" for="social_icon">{{ __('Social icon colour') }}</label>
+                <input id="social_icon" name="{{ SiteSettingKeys::SOCIAL_ICON_COLOR }}" type="color" class="form-control form-control-color" value="{{ old(SiteSettingKeys::SOCIAL_ICON_COLOR, SiteColors::normalizeHex($values->get(SiteSettingKeys::SOCIAL_ICON_COLOR), $values->get(SiteSettingKeys::PRIMARY_COLOR, '#2d6a4f'))) }}">
+            </div>
+            <div class="col-md-3">
                 <label class="form-label" for="bodyc">{{ __('Body text') }}</label>
                 <input id="bodyc" name="{{ SiteSettingKeys::BODY_TEXT_COLOR }}" type="color" class="form-control form-control-color" value="{{ old(SiteSettingKeys::BODY_TEXT_COLOR, SiteColors::normalizeHex($values->get(SiteSettingKeys::BODY_TEXT_COLOR), '#1b4332')) }}">
             </div>
@@ -86,6 +98,11 @@
                         <option value="{{ $stack }}" @selected($fontHeading === $stack)>{{ $label }}</option>
                     @endforeach
                 </select>
+            </div>
+            <div class="col-12">
+                <label class="form-label" for="meta_description">{{ __('Site description for SEO') }}</label>
+                <textarea id="meta_description" name="{{ SiteSettingKeys::META_DESCRIPTION }}" class="form-control" rows="3">{{ old(SiteSettingKeys::META_DESCRIPTION, $values->get(SiteSettingKeys::META_DESCRIPTION)) }}</textarea>
+                <div class="form-text">{{ __('A concise page description used for search engine previews and shared links.') }}</div>
             </div>
             <div class="col-md-3">
                 <label class="form-label" for="fs">{{ __('Base font size (px)') }}</label>
