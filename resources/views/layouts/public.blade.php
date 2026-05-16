@@ -6,6 +6,18 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>@yield('title', $siteName)</title>
+    <meta name="description" content="@yield('meta_description', $siteDescription)">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="{{ url()->current() }}">
+    <meta property="og:title" content="@yield('og_title', $siteName)">
+    <meta property="og:description" content="@yield('og_description', $siteDescription)">
+    <meta property="og:url" content="{{ url()->current() }}">
+    @if($logoPath)
+        <meta property="og:image" content="{{ \App\Support\Media::url($logoPath) }}">
+    @endif
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="{{ $logoPath ? \App\Support\Media::url($logoPath) : asset('favicon.ico') }}" type="image/png">
+    <link rel="apple-touch-icon" href="{{ $logoPath ? \App\Support\Media::url($logoPath) : asset('favicon.ico') }}">
 
     @vite(['resources/js/app.js'])
 
@@ -20,6 +32,7 @@
             --mt-secondary: {{ $theme['secondary'] }};
             --mt-body: {{ $theme['body'] }};
             --mt-heading: {{ $theme['heading'] }};
+            --mt-social-icon: {{ $theme['social_icon'] }};
 
             --mt-font-base: {{ $theme['font_base'] }};
             --mt-font-heading: {{ $theme['font_heading'] }};
@@ -111,31 +124,101 @@
             backdrop-filter: blur(10px);
         }
 
+        /* Comprehensive Responsive & Animation Styling */
+
+        * {
+            scroll-behavior: smooth;
+        }
+
+        html, body {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Typography Enhancements */
+        h1, h2, h3, h4, h5, h6 {
+            letter-spacing: -0.01em;
+            font-weight: 700;
+        }
+
+        p {
+            line-height: 1.7;
+        }
+
+        .text-brand {
+            color: var(--mt-primary) !important;
+            font-weight: 700;
+        }
+
+        /* Navigation Styling */
+        .site-navbar {
+            background: linear-gradient(135deg, rgba(255,255,255,0.98), rgba(255,255,255,0.95));
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
         .site-navbar .navbar-brand {
             font-weight: 700;
             letter-spacing: 0.02em;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .site-navbar .navbar-brand:hover {
+            transform: translateX(2px);
         }
 
         .site-navbar .nav-link {
             color: var(--mt-body);
             font-weight: 500;
-            transition: 0.2s ease;
+            position: relative;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 0.5rem 1rem !important;
+            border-radius: 0.375rem;
+        }
+
+        .site-navbar .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 1rem;
+            width: 0;
+            height: 2px;
+            background-color: var(--mt-primary);
+            transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .site-navbar .nav-link:hover {
             color: var(--mt-primary);
+            background-color: rgba(45, 106, 79, 0.08);
+        }
+
+        .site-navbar .nav-link:hover::after {
+            width: calc(100% - 2rem);
         }
 
         .site-navbar .nav-link.active {
             color: var(--mt-primary);
+            background-color: rgba(45, 106, 79, 0.1);
         }
 
-        /* =========================
-           Top Bar
-        ========================== */
+        .site-navbar .nav-link.active::after {
+            width: calc(100% - 2rem);
+        }
 
+        /* Top Bar */
         .top-strip {
-            background-color: var(--mt-primary);
+            background: linear-gradient(135deg, var(--mt-primary) 0%, color-mix(in srgb, var(--mt-primary) 85%, black) 100%);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .top-strip a {
+            transition: all 0.3s ease;
         }
 
         .navbar-brand-site {
@@ -143,38 +226,245 @@
             letter-spacing: 0.02em;
         }
 
-        /* =========================
-           Footer
-        ========================== */
-
+        /* Footer */
         .site-footer {
-            background-color: color-mix(
-                in srgb,
-                var(--mt-heading) 92%,
-                black
-            );
+            background: linear-gradient(135deg, color-mix(in srgb, var(--mt-heading) 92%, black) 0%, color-mix(in srgb, var(--mt-heading) 85%, black) 100%);
+            margin-top: auto;
+            box-shadow: 0 -4px 12px rgba(0,0,0,0.08);
         }
 
         .site-footer a {
-            transition: 0.2s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .site-footer a:hover {
-            opacity: 0.85;
+            transform: translateY(-2px);
+            opacity: 0.9;
         }
 
-        /* =========================
-           Bootstrap Overrides
-        ========================== */
+        .site-footer-section h5 {
+            position: relative;
+            padding-bottom: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .site-footer-section h5::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background-color: var(--mt-primary);
+            border-radius: 2px;
+        }
+
+        /* Button Styling */
+        .btn {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 0.5rem;
+            font-weight: 500;
+            letter-spacing: 0.01em;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+        }
 
         .btn-primary {
             --bs-btn-bg: var(--mt-primary);
             --bs-btn-border-color: var(--mt-primary);
-
             --bs-btn-hover-bg: color-mix(in srgb, var(--mt-primary) 88%, black);
             --bs-btn-hover-border-color: color-mix(in srgb, var(--mt-primary) 88%, black);
+            box-shadow: 0 4px 12px rgba(45, 106, 79, 0.2);
         }
 
+        .btn-outline-primary {
+            border-width: 2px;
+        }
+
+        .btn-outline-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(45, 106, 79, 0.15);
+        }
+
+        .btn-social {
+            color: var(--mt-social-icon) !important;
+            border-color: var(--mt-social-icon) !important;
+            border-width: 2px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 1.1rem;
+        }
+
+        .btn-social:hover,
+        .btn-social:focus {
+            color: #fff !important;
+            background-color: var(--mt-social-icon) !important;
+            border-color: var(--mt-social-icon) !important;
+            transform: scale(1.1) translateY(-2px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.2);
+        }
+
+        /* Cards */
+        .card {
+            border: 0;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .card:hover {
+            box-shadow: 0 16px 32px rgba(0,0,0,0.12);
+        }
+
+        .card-img-top {
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card:hover .card-img-top {
+            transform: scale(1.05);
+        }
+
+        .service-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 0.875rem;
+            overflow: hidden;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 24px 48px rgba(0, 0, 0, 0.12);
+        }
+
+        /* Hero Carousel */
+        .hero-carousel .carousel-item {
+            transition: opacity 0.6s ease-in-out;
+            position: relative;
+        }
+
+        .hero-carousel .carousel-item img {
+            height: 100%;
+            object-fit: cover;
+            animation: zoomIn 0.8s ease-out;
+        }
+
+        @keyframes zoomIn {
+            from {
+                transform: scale(1.1);
+                opacity: 0.8;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .hero-carousel .carousel-caption {
+            backdrop-filter: blur(10px);
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.2) 100%);
+            border-top: 2px solid rgba(255,255,255,0.2);
+            padding: 2.5rem;
+            border-radius: 0.5rem 0.5rem 0 0;
+        }
+
+        .hero-carousel .carousel-caption h2,
+        .hero-carousel .carousel-caption p {
+            text-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            letter-spacing: -0.01em;
+        }
+
+        .carousel-control-prev,
+        .carousel-control-next {
+            transition: all 0.3s ease;
+        }
+
+        .carousel-control-prev:hover,
+        .carousel-control-next:hover {
+            transform: scale(1.1);
+        }
+
+        /* Animations */
+        .reveal-up {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: revealUp 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+        }
+
+        @keyframes revealUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.6s ease-in-out both;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .slide-in-left {
+            animation: slideInLeft 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .slide-in-right {
+            animation: slideInRight 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.7;
+            }
+        }
+
+        /* Object Fit */
+        .object-fit-cover {
+            object-fit: cover;
+        }
+
+        .object-fit-contain {
+            object-fit: contain;
+        }
+
+        /* Color & Theme */
         .text-primary {
             color: var(--mt-primary) !important;
         }
@@ -183,12 +473,140 @@
             background-color: var(--mt-primary) !important;
         }
 
-        /* =========================
-           Smoothness
-        ========================== */
+        .text-brand {
+            color: var(--mt-primary);
+        }
 
-        * {
-            scroll-behavior: smooth;
+        /* Mobile Responsive Adjustments */
+        @media (max-width: 991px) {
+            .site-navbar .navbar-brand {
+                font-size: 1.25rem;
+            }
+
+            .site-navbar .nav-link {
+                padding: 0.375rem 0.75rem !important;
+                font-size: 0.95rem;
+            }
+
+            .site-navbar .nav-link::after {
+                height: 1px;
+            }
+
+            .top-strip {
+                font-size: 0.875rem;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-carousel .carousel-caption {
+                padding: 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .hero-carousel .carousel-caption h2 {
+                font-size: 1.5rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .service-card:hover {
+                transform: translateY(-4px);
+            }
+
+            .card:hover {
+                box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+            }
+
+            .btn {
+                width: 100%;
+                margin-bottom: 0.5rem;
+            }
+
+            .reveal-up {
+                animation: revealUp 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+            }
+
+            h1 {
+                font-size: 1.75rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            p {
+                font-size: 0.95rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .site-navbar .navbar-brand {
+                font-size: 1.125rem;
+            }
+
+            .container {
+                padding: 0 0.75rem;
+            }
+
+            .top-strip {
+                padding: 0.5rem 0 !important;
+                flex-direction: column;
+                text-align: center;
+                gap: 0.5rem !important;
+            }
+
+            .top-strip .d-flex {
+                flex-direction: column !important;
+                width: 100%;
+            }
+
+            .btn-social {
+                font-size: 1rem;
+                padding: 0.5rem 0.75rem;
+            }
+
+            .reveal-up {
+                transform: translateY(20px);
+            }
+
+            section {
+                padding: 2rem 0 !important;
+            }
+
+            .col-md-6,
+            .col-md-4,
+            .col-lg-4 {
+                margin-bottom: 1rem;
+            }
+
+            .card-body {
+                padding: 1.25rem;
+            }
+
+            .display-6 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Focus & Accessibility */
+        a:focus,
+        button:focus,
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: 2px solid var(--mt-primary);
+            outline-offset: 2px;
+        }
+
+        /* Loading State */
+        .btn:disabled,
+        .btn[disabled] {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none !important;
         }
     </style>
 
@@ -202,8 +620,11 @@
         <div class="container d-flex flex-wrap align-items-center justify-content-between gap-2">
 
             <div class="d-flex align-items-center gap-2">
-                <i class="fa-solid fa-leaf" aria-hidden="true"></i>
-
+                    @if($logoPath)
+                        <img src="{{ \App\Support\Media::url($logoPath) }}" alt="{{ $siteName }}" class="d-block rounded" style="max-height: 40px; width: auto;">
+                    @else
+                        <i class="fa-solid fa-leaf" aria-hidden="true"></i>
+                    @endif
                 <span class="navbar-brand-site">
                     {{ $siteName }}
                 </span>
@@ -269,8 +690,11 @@
 
         <div class="container">
 
-            <a class="navbar-brand text-brand" href="{{ route('home') }}">
-                {{ $siteName }}
+            <a class="navbar-brand text-brand d-flex align-items-center gap-2" href="{{ route('home') }}">
+                @if($logoPath)
+                    <img src="{{ \App\Support\Media::url($logoPath) }}" alt="{{ $siteName }}" class="d-block rounded" style="max-height: 36px; width: auto;">
+                @endif
+                <span>{{ $siteName }}</span>
             </a>
 
             <button
@@ -313,6 +737,15 @@
                             href="{{ route('posts.index') }}"
                         >
                             {{ __('News') }}
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a
+                            class="nav-link @if(request()->routeIs('services.index')) active fw-semibold @endif"
+                            href="{{ route('services.index') }}"
+                        >
+                            {{ __('Services') }}
                         </a>
                     </li>
 
@@ -415,7 +848,7 @@
                         @foreach($socialLinks as $link)
 
                             <a
-                                class="btn btn-outline-light btn-sm rounded-pill"
+                                class="btn btn-outline-light btn-sm rounded-pill btn-social"
                                 href="{{ $link->url }}"
                                 target="_blank"
                                 rel="noopener"
