@@ -19,6 +19,7 @@ class AdminLayoutComposer
     public function compose(View $view): void
     {
         $view->with('adminSiteName', $this->settings->get(SiteSettingKeys::SITE_NAME, config('app.name')));
+        $view->with('logoPath', $this->settings->get(SiteSettingKeys::SITE_LOGO_PATH, ''));
         $view->with(
             'unreadContactCount',
             ContactMessage::query()->whereNull('read_at')->count()
