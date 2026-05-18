@@ -15,7 +15,21 @@
                 <div class="carousel-inner">
                     @foreach($slides as $i => $slide)
                         <div class="carousel-item @if($i === 0) active @endif">
-                            <img src="{{ \App\Support\Media::url($slide->image_path) }}" class="d-block w-100 object-fit-cover" style="max-height: 560px; object-fit: cover;" alt="{{ $slide->title }}">
+                            <div class="hero-slide-image-wrapper">
+
+                                {{-- Blurred background --}}
+                                <div
+                                    class="hero-slide-bg"
+                                    style="background-image: url('{{ \App\Support\Media::url($slide->image_path) }}')"
+                                ></div>
+
+                                {{-- Main image --}}
+                                <img
+                                    src="{{ \App\Support\Media::url($slide->image_path) }}"
+                                    class="hero-slide-image"
+                                    alt="{{ $slide->title }}"
+                                >
+                            </div>
                             <div class="carousel-caption text-start">
                                 <h2 class="h3 mb-1">{{ $slide->title }}</h2>
                                 @if($slide->description)
