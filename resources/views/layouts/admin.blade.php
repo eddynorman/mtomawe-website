@@ -6,6 +6,11 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', __('Admin')) — {{ config('app.name') }}</title>
     @vite(['resources/js/admin.js'])
+    @if($logoPath)
+        <meta property="og:image" content="{{ \App\Support\Media::url($logoPath) }}">
+    @endif
+    <link rel="icon" href="{{ $logoPath ? \App\Support\Media::url($logoPath) : asset('favicon.ico') }}" type="image/png">
+    <link rel="apple-touch-icon" href="{{ $logoPath ? \App\Support\Media::url($logoPath) : asset('favicon.ico') }}">
     @stack('head')
 </head>
 <body class="bg-body-tertiary">
