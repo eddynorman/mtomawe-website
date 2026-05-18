@@ -20,7 +20,7 @@
 
             <div class="row g-4 g-lg-5">
                 @forelse($services as $index => $service)
-                    <div class="col-12" style="animation-delay: {{ $index * 0.05 }}s;">
+                    <div class="col-12 service-section" style="animation-delay: {{ $index * 0.05 }}s;">
                         <article class="card border-0 shadow-sm overflow-hidden reveal-up service-card">
                             <div class="row g-0 align-items-stretch">
                                 <div class="col-lg-5 position-relative overflow-hidden" style="min-height: 300px;">
